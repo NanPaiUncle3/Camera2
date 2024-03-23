@@ -6,6 +6,9 @@ on:
   pull_request:
     branches: [ "master" ]
 
+permissions:
+  contents: write
+
 jobs:
   build:
 
@@ -18,14 +21,3 @@ jobs:
       uses: actions/setup-java@v1
       with:
         java-version: 11
- 
-    - name: Set up Android SDK
-      uses: android-actions/sdk-manager@v2
-      with:
-        packages: "build-tools;30.0.3,platforms;android-30"
- 
-    - name: Build Camera2
-      run: |
-        source build/envsetup.sh
-        lunch aosp_arm-eng
-        m -j $(nproc)
